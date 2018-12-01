@@ -24,6 +24,15 @@
      (get alphabet (str character)))
    message))
 
+(defn clacks-message
+  "Converts a collection of Clacks notations to message using the alphabet"
+  [clacks alphabet]
+  (reduce
+   str
+   (map
+    (fn [clack]
+      (get alphabet clack))
+    clacks)))
 
 
 

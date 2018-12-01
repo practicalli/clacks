@@ -8,8 +8,9 @@
     (is (not
          (empty? alphabet))))
   (testing "Test message conversion to Clacks notation"
-    (is (= ["001010" "010001" "100111"] (message-clacks "bat" alphabet) ))
-    ))
+    (is (= ["001010" "010001" "100111"] (message-clacks "bat" alphabet) )))
+  (testing "Test clacks message conversion to English message"
+    (is (= "bat" (clacks-message ["001010" "010001" "100111"] alphabet-inverted) ))))
 
 
 
