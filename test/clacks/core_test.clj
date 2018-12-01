@@ -7,9 +7,6 @@
     (is (map? alphabet))
     (is (not
          (empty? alphabet))))
-  (testing "Test character conversion to Clacks notation"
-    (is (= "010001" (character-clack "a" alphabet) ))
-    (is (= "001010" (character-clack "b" alphabet) )))
   (testing "Test message conversion to Clacks notation"
     (is (= ["001010" "010001" "100111"] (message-clacks "bat" alphabet) ))
     ))

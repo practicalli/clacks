@@ -16,18 +16,14 @@
 (def alphabet-inverted (clojure.set/map-invert alphabet))
 
 
-(defn character-clack
-  "Converts a single character to the Clacks notation"
-  [character alphabet]
-  (get alphabet (str character)))
-
 (defn message-clacks
   "Converts a message to the Clacks notation"
   [message alphabet]
   (map
    (fn [character]
-     (character-clack character alphabet))
+     (get alphabet (str character)))
    message))
+
 
 
 
