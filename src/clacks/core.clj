@@ -13,31 +13,35 @@
                "b" "001010"
                "t" "100111"})
 
+(def alphabet-inverted (clojure.set/map-invert alphabet))
+
+
 (defn character-clack
   "Converts a single character to the Clacks notation"
-  [character]
+  [character alphabet]
   (get alphabet (str character)))
 
 (defn message-clacks
   "Converts a message to the Clacks notation"
-  [message]
-  (map character-clacks message))
+  [message alphabet]
+  (map
+   (fn [character]
+     (character-clack character alphabet))
+   message))
 
 
 
-;; REPL Experiements
+;; REPL Experiments
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#_(character-clacks :a)
 
-(character-clacks "b")
+#_(character-clacks "b")
 
-(map character-clacks "bat")
+#_(map character-clacks "bat")
 
-(message-clacks "bat")
-;; => ("001010" "010001" "100111")
+#_(message-clacks "bat" alphabet)
 
-;; strings are not equal to its caracter
-(= "a" \b)
+;; strings are not equal to its character
+ #_(= "a" \b)
 
 
 
@@ -47,7 +51,7 @@
                  :b "001010"
                  :t "100111"})
 
-
+#_(character-clacks :a)
 
 
 
