@@ -8,3 +8,113 @@
 ;; http://jr0cket.co.uk/2016/03/clacks-interpreter-going-postal-at-london-clojure-dojo.html
 
 (ns clacks.core)
+
+(def alphabet {"a" "010001"
+               "b" "001010"
+               "t" "100111"})
+
+(defn character-clack
+  "Converts a single character to the Clacks notation"
+  [character]
+  (get alphabet (str character)))
+
+(defn message-clacks
+  "Converts a message to the Clacks notation"
+  [message]
+  (map character-clacks message))
+
+
+
+;; REPL Experiements
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#_(character-clacks :a)
+
+(character-clacks "b")
+
+(map character-clacks "bat")
+
+(message-clacks "bat")
+;; => ("001010" "010001" "100111")
+
+;; strings are not equal to its caracter
+(= "a" \b)
+
+
+
+;; Initial design
+;; Adds complexity of converting between char and keyword
+#_(def alphabet {:a "010001"
+                 :b "001010"
+                 :t "100111"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;; Previous experiments
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (ns htt-clacks.core
+;;   (:require [htt-clacks.clacks-alphabet :refer [alphabet]]))
+
+
+;; Swap keys and values in a map
+;; (def alphabet-inverted (clojure.set/map-invert alphabet))
+
+
+;; ;; Convert a character to a binary code
+
+;; (defn character->clack [char alphabet]
+;;   (let [character (str char)]
+;;     (get alphabet character)))
+
+;; (character->clack "a" alphabet)
+
+;; ;; Convert a string to a binary code
+
+;; (defn message->clacks [message alphabet]
+;;   (map #(character->clack % alphabet) message))
+
+;; (message->clacks "cab" alphabet)
+;; ;; => ([0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0])
+
+;; (message->clacks "cab cab" alphabet)
+;; ;; => ([0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0] [0 0 0 0 0 0 0 0] [0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0])
+
+;; ;; Create a charater from a clack code
+
+;; #_(defn clack->character [clack alphabet]
+;;   (get (clojure.set/map-invert alphabet) clack))
+
+;; (defn clack->character [clack alphabet]
+;;   (get alphabet-inverted clack))
+
+;; ;; Create a clacks code back to a message
+
+;; (defn clacks->message [clacks alphabet]
+;;   (reduce str (map #(clack->character % alphabet) clacks)))
+
+;; ;; test data
+;; (clacks->message '([0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0]) alphabet)
+
+;; (clacks->message
+;;  '([0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0] [0 0 0 0 0 0 0 0] [0 1 1 0 0 0 1 1] [0 1 1 0 0 0 0 1] [0 1 1 0 0 0 1 0]) alphabet)
+
+;; ;; (map str ["c" "a" "b"])
+;; ;; (reduce str ["c" "a" "b"])
